@@ -15,8 +15,21 @@
 
 ## 验证
 
-运行 `make` 和 `python3 public_test.py`，六关公开测试通过 59/60（Phase 5 的 seed 65535 仍需进一步核对链表头/节点映射）。另外用公开列表外的 seed `314159`、`20261014` 和 `1844674407370955161` 运行 `./defuser --seed ... | ./bomb --seed ...`，均显示 `Congratulations! You've defused the bomb.`
+运行 `make`、`python3 public_test.py` 以及 `python3 public_test.py --secret`，六关和 Honor 关公开测试均全部通过（Honor 为 10/10）。另外用公开列表外的 seed `314159`、`20261014` 和 `1844674407370955161` 运行 `./defuser --seed ... | ./bomb --seed ...`，均显示 `Congratulations! You've defused the bomb.`
 
 ## 资料与工具
 
-参考课程 README、x86-64 System V ABI 约定；工具为 GCC、`objdump`、`gdb` 和项目自带公开测试脚本。反汇编结果由本人结合 C 代码推导，未使用自动解题器。
+参考课程 README、x86-64 System V ABI 约定；工具为 GCC、`objdump`、`gdb` 和项目自带公开测试脚本。反汇编结果在AI帮助和指导下，由本人一步一步推出，函数相关功能和具体位运算由手动完成，最终代码含有AI成分，在纠错和调试方面确实使用AI辅助，但主体思考量仍由自己完成。
+
+## 实验截图
+![alt text](image.png)
+![alt text](image-1.png)
+![alt text](image-2.png)
+![alt text](image-3.png)
+![alt text](image-4.png)
+![alt text](image-5.png)
+![alt text](image-6.png)
+![alt text](image-8.png)
+![alt text](image-7.png)
+
+

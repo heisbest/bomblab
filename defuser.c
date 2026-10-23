@@ -96,7 +96,7 @@ int solve_phase_5(uint64_t challenge, char *out, size_t cap) {
         {3, 0xb1a, 0xa78e}, {0, 0x334, 0xbab2}, {2, 0x863, 0x1936},
         {1, 0x227, 0xd30b}, {4, 0xa5d, 0x1219}, {11, 0x988, 0xe1f3}
     };
-    static const unsigned heads[8] = {7, 0, 6, 3, 8, 10, 10, 4};
+    static const unsigned heads[8] = {7, 0, 6, 3, 8, 2, 10, 4};
     unsigned n = heads[(unsigned)challenge & 7U];
     uint32_t fold = (uint32_t)(((challenge >> 6) ^ (challenge >> 32)) & 0xffffffffU) ^ 0xec77U;
     fold = fold * 3U + nodes[n].value;
@@ -139,11 +139,11 @@ int solve_phase_6(uint64_t challenge, char *out, size_t cap) {
 
 int solve_secret(uint64_t challenge, uint64_t context, char *out, size_t cap) {
     uint32_t a = (uint32_t)context & 3U;
-    uint32_t r8 = (uint32_t)(challenge >> 32) ^ (uint32_t)challenge;
-    uint32_t esi = (uint32_t)(context >> 32) ^ (uint32_t)context;
+    uint32_t r8 = (uint32_t)(context >> 32) ^ (uint32_t)context;
+    uint32_t esi = (uint32_t)(challenge >> 32) ^ (uint32_t)challenge;
     uint32_t edi = esi ^ r8;
     uint32_t mix = ((edi >> 1) ^ 0xd243U) + (edi ^ 0xce66U);
-    uint32_t b = mix ^ (a * 0xce66U) ^ (uint32_t)(challenge >> 16);
+    uint32_t b = mix ^ (a * 0xce66U) ^ (uint32_t)(context >> 16);
     uint32_t c = b ^ (r8 + a + 0xd243U + (esi >> 1));
     int n = snprintf(out, cap, "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOPEN %u %u %u", a, b, c);
     return (n < 0 || (size_t)n >= cap) ? 1 : 0;
